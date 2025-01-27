@@ -13,12 +13,22 @@
 >
     <div class="flex flex-row items-center">
         @if (!empty($icon) && $iconPosition === 'left')
-            <x-icon :name="$icon" class="mr-2" />
+            <x-icon :name="$icon"/>
         @endif
-        {{ $text }}
+        
+        <span 
+            {{ 
+                $attributes->class([
+                    "ml-2" => !empty($text) && !empty($icon) && $iconPosition === 'left',
+                    "mr-2" => !empty($text) && !empty($icon) && $iconPosition === 'right',
+                ]) 
+            }}
+        >
+            {{ $text ?? "" }}
+        </span>
 
         @if (!empty($icon) && $iconPosition === 'right')
-            <x-icon :name="$icon" class="ml-2"/>
+            <x-icon :name="$icon"/>
         @endif
     </div>
 </button>
