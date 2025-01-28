@@ -14,6 +14,7 @@
 <body class="min-h-screen w-full flex items-start">
 
     <div class="flex flex-col items-center w-full">
+        <x-header logo="logo.png"></x-header>
         {{ $slot }}
     </div>
 </body>

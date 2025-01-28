@@ -6,19 +6,16 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class icon extends Component
+class header extends Component
 {
-
-    public string $name;
-    public string $size;
+    public string $logo;
 
     /**
      * Create a new component instance.
      */
-    public function __construct(string $name, string $size)
+    public function __construct(string $logo)
     {
-        $this->name = $name;
-        $this->size = $size;
+        $this->logo = $logo;
     }
 
     /**
@@ -26,6 +23,6 @@ class icon extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.icon');
+        return view('components.header');
     }
 }

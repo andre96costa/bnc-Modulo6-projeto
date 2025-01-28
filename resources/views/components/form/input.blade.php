@@ -8,7 +8,7 @@
     <div class="relative w-full flex items-center">
    
         @if (!empty($icon) && $iconPosition === 'left')
-            <x-icon :name="$icon" class="absolute left-4"></x-icon>
+            <x-icon :name="$icon" :size="$size" class="absolute left-4"></x-icon>
         @endif
     
         <input 
@@ -28,7 +28,7 @@
         >
     
         @if (!empty($icon) && $iconPosition === 'right')
-            <x-icon :name="$icon" class="absolute right-4"></x-icon>
+            <x-icon :name="$icon" :size="$size" class="absolute right-4"></x-icon>
         @endif
 
     </div>
