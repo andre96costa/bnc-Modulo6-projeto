@@ -1,12 +1,13 @@
 <x-layouts.base>
     <div class="flex flex-row items-center justify-center w-full">
-        <x-button
-            type="button"
-            text="Enviar"
-            variation="primary"
+        <x-form.input
+            type="text"
+            name="name"
+            placeholder="Name"
             size="large"
             icon="home"
-            iconPosition="right"
-        > </x-button>
+            iconPosition="left"
+            label="Name"
+        > </x-form.input>
     </div>
 </x-layouts.base>
