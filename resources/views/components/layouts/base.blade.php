@@ -16,6 +16,7 @@
     <div class="flex flex-col items-center w-full">
         <x-header logo="logo.png"></x-header>
         {{ $slot }}
+        <x-footer></x-footer>
     </div>
 </body>
 </html>
