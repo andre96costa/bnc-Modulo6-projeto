@@ -11,7 +11,7 @@
         <x-icon @click="changeImage('previous')" name="chevron_left" size="large" class="cursor-pointer absolute left-0"></x-icon>
 
         @foreach ($images as $image)
-            <img x-ref="image{{$loop->index}}" @click="$refs.highlight.src = $event.target.src" src="{{ Vite::asset("resources/images/$image") }}" alt="image" class="w-12 h-12 object-cover object-center rounded-md bg-gray-300 cursor-pointer hover:bg-gray-400">            
+            <img x-ref="image{{$loop->index}}" @click="showImage($event.target.src)" src="{{ Vite::asset("resources/images/$image") }}" alt="image" class="w-12 h-12 object-cover object-center rounded-md bg-gray-300 cursor-pointer hover:bg-gray-400">            
         @endforeach
 
         <x-icon @click="changeImage('next')" name="chevron_right" size="large" class="cursor-pointer absolute right-0"></x-icon>
