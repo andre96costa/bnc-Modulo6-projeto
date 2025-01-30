@@ -13,5 +13,6 @@
                 <x-product-actions></x-product-actions>
             </div>
         </div>
+        <x-tabs />
     </div>
 </x-layouts.base>
