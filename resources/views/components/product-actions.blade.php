@@ -14,7 +14,7 @@
             <x-form.button @click="count = count + 1" type="button" variation="outline" size="small" icon="add" icon-position="left" />
         </div>
 
-        <x-form.button type="button" variation="primary" size="medium" icon="shopping_cart" icon-position="left" text="Add to cart" />
+        <x-form.button @click="$dispatch('open-cart')" type="button" variation="primary" size="medium" icon="shopping_cart" icon-position="left" text="Add to cart" />
         <x-form.button class="mt-2" type="button" variation="outline" size="medium" text="By now" />
 
         <div class="flex flex-col flex-shrink-0 items-start mt-4 space-y-1">
