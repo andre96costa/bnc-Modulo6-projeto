@@ -21,7 +21,7 @@
         />
     </div>
 
-    <div class="flex flex-row items-center space-x-0.5">
+    <div class="flex flex-row items-center space-x-0.5" x-data="{}">
         <x-form.button 
             class="flex md:hidden"
             type="button"
@@ -39,7 +39,8 @@
             icon-position="left"
             text="Login In"
         />
-        <x-form.button  
+        <x-form.button
+            @click="$dispatch('open-cart')"  
             type="button"
             variation="outline"
             size="medium"
