@@ -1,66 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Módulo 6 - Front Básico
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+O laravel por padrão usa o template engine *Blade* para a renderização dinâmica no frontend. O blade consegue manipular dados vindos do backend, acessar helpers da framework e utiliza diretivas para realização de logicas.
 
-## About Laravel
+Podemos criar nossas próprias diretivas, no arquivo *app/Providers/AppServiceProvider.php* no método *boot()* basta usar a facade  *Blade::directive.*
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- {{ }} - Presenta informações do backend no front, realizando um tratamento para limpar html e js.
+- {!! !!} - Presenta informações do backend no front, não realiza tratamento de dados.
+- {{ Js::from(*$user*) }} - Passar dados direto para o javascript.
+- @if - Diretivas de controle na blade
+- @unless - É o contrario do if.
+- @isset - Valida se um atributo está setado.
+- @empty - Verifica se está vazio.
+- @auth - Valida se o usuario está logado.
+- @guest - Valida usuarios não logados.
+- @production - Valida se o servidor está em módo produção.
+- @env - Valida em qual ambiente o servidor está rodando.
+- @switch - Escolha entre alguma das opções
+    - @case - opção
+    - @break - fim da opção
+    - @default - opcão padrão
+- @for - Loop
+- @foreach - Loop
+    - $loop→first - Primeiro elemento da iteração
+    - $loop→last - Ultimo elemento da iteração
+    - $loop→index - Index atual
+    - $loop→remaining - Quantas iterações faltam.
+    - $loop→even - Iteração par.
+    - $loop→odd - Iteração impar.
+    - $loop→iteration - Iteração atual.
+    - $loop→parent - Variavel loop do foreach mais esterno.
+    - $loop→depth - Nivel do loop em caso de loops aninhados.
+    - $loop→count -  Total de itens no array que está sendo iterado.
+- @while - Loop
+- @class - Permite passar uma lista de classes css para um html.
+- @style - Permite passar uma lista de estilos diretamente para o html
+- @checked - Valida se o html será checked ou não.
+- @selected - Usado no select html para dizer qual item está selecionado.
+- @disable - Desabilitar um elemento html
+- @readonly - Um elemento html será somente leitura.
+- @required - Um atributo do html é obrigatório.
+- @error - Usando para mostrar mensagens de error nas views.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Herança de templates
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Podemos criar um layout base para o projeto e através da herança de template podemos 
 
-## Learning Laravel
+- @yield - Gera uma section no template, renderizando um conteúdo dinâmico.
+- @extends - Faz a herança com outro template.
+- @section - Conteúdo do template filho que será renderizado no componente pai.
+- @sectionMissing - Verifica se existe uma view estendendo um section específica.
+- @hasSection - Verifica se existe uma view estendendo um section específica.
+- @include - Inclui “manualmente” um pagina. Existem variações do include para vários tipos de validação.
+- @stack -
+- @pushonce -
+- @prependonce -
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Blade components
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+No laravel podem criar 2 tipos de componentes, class components ou anonymous components. Todos os componentes seram chamados atraves de uma tag no formato <x-name_component />
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Quem renderiza o componente é a classe associada.
+- Variavies publicas criadas na classe, ficam disponiveis na view.
+- Ao passar um atributo para o HTML esse será passado para a classe via construtor.
+- Os componentes possuem um atributo especial chamado $attributes que possuem algums métodos, como o class() e merge()
+- @aware - é utilizada para pegar um atributo do componente pai.
+- {{ $slot }} - É utilizada para incluir dentro do componente um novo elemento HTML ou outro componente.
+- Podemos usar slots nomeados {{ $icon }}, para passar o conteúdo é necessário usar a tag          <x-slot:icon></x-slot:icon>
+- No método render() podemos retornar uma clouser que recebe um array. Esse array contem todo o que está sendo passado para a classe do componente. Dessa forma temos acesso as informações.
 
-## Laravel Sponsors
+### Compilando assets
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- instalar dependencias js
+- O arquivo vite.config.js indica quais pastar o vite ira compilar.
+- Podemos utilizar a facade Vite para acessar imagens, css e js dentro da pasta resource.
+- Também podemos criar uma macro que facilite a utilização da facede vite.
 
-### Premium Partners
+### Tailwind CSS
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+No laravel 11 o tailwind css já vem por padrão, em outras versões do laravel basta seguir a documentação do tailwind. O arquivo *tailwind.config.js* é responsavel por configurar o tailwind, indicando em quais tipos de arquivos ele deve ser executado, também podemos criar nossas configurações de css.
 
-## Contributing
+### AlpineJS
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Instalar e adicionar a chamada do alpine no arquivo *resources/js/app.js*
